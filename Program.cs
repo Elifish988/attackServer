@@ -1,15 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace attackServer
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            //1.
+            //string rezolt = await GetTaskAsync();
+            //Console.WriteLine(rezolt);
+            //Console.ReadLine();
+
+            //2.
+            //string filePathToString = "D:\\kodcode\\attackServer\\TextFile1.txt";
+            //string content = await ReadFileAsync(filePathToString);
+            //Console.WriteLine(content);
+
+            //3.
+            Task<string> TaskA = GetDataFromServiceAAsync();
+            Task<string> TaskB = GetDataFromServiceBAsync();
+
+            await Task.WhenAll(TaskA, TaskB);
+
+            Console.WriteLine(TaskA.Result);
+            Console.WriteLine(TaskB.Result);
+
+
+        }
+
+        public static async Task<string> GetTaskAsync()
+        {
+            await Task.Delay(3000);
+            return "Recivde Data";
+
+
+        }
+
+        public static async Task<string> ReadFileAsync(string filPath)
+        {
+            string result = await Task.Run(()=> File.ReadAllText(filPath));
+            return result;
+        }
+
+        public static async Task<string> GetDataFromServiceAAsync()
+        {
+            await Task.Delay(1000);
+            return "Data from service A";
+        }
+
+        public static async Task<string> GetDataFromServiceBAsync()
+        {
+            await Task.Delay(8000);
+            return "Data from service B";
         }
     }
 }
