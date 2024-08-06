@@ -50,6 +50,8 @@ namespace attackServer
             return result;
         }
 
+
+
         public static async Task<string> GetDataFromServiceAAsync()
         {
             await Task.Delay(1000);
