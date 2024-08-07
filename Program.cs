@@ -25,13 +25,26 @@ namespace attackServer
             //Console.WriteLine(content);
 
             //3.
-            Task<string> TaskA = GetDataFromServiceAAsync();
-            Task<string> TaskB = GetDataFromServiceBAsync();
+            //Task<string> TaskA = GetDataFromServiceAAsync();
+            //Task<string> TaskB = GetDataFromServiceBAsync();
 
-            await Task.WhenAll(TaskA, TaskB);
+            //await Task.WhenAll(TaskA, TaskB);
 
-            Console.WriteLine(TaskA.Result);
-            Console.WriteLine(TaskB.Result);
+            //Console.WriteLine(TaskA.Result);
+            //Console.WriteLine(TaskB.Result);
+
+            //4.
+            //Node<int> node2 = new Node<int>(5);
+            //Node<int> node1 = new Node<int>(3, node2);
+            //Console.WriteLine(node2.ToString());
+            //Console.WriteLine(node1.ToString());
+
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(5);
+            queue.Dequeue();
+            Console.WriteLine(queue.Dequeue());
+
+
 
 
         }
@@ -60,8 +73,11 @@ namespace attackServer
 
         public static async Task<string> GetDataFromServiceBAsync()
         {
-            await Task.Delay(8000);
+            await Task.Delay(2000);
             return "Data from service B";
         }
+
+        
+        
     }
 }
